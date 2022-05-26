@@ -1,5 +1,7 @@
 # number-wizard
-A bunch of functions to convert numbers into strings of required format.
+A bunch of functions to convert numbers into strings (or other numbers) of required format.
+
+Some functions work with strings too because I am cool.
 
 ## How to run
 ```js
