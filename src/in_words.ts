@@ -38,40 +38,61 @@ const tenPowers = {
   int: [
     "{ones}",
     "{tens}",
-    "{ones} hundred",
-    "{ones} thousand",
+    "{ones} hundred and",
+    "{ones} thousand,",
     "{tens}",
-    "{ones} hundred",
-    "{ones} million",
+    "{ones} hundred and",
+    "{ones} million,",
     "{tens}",
-    "{ones} hundred",
-    "{ones} billion",
+    "{ones} hundred and",
+    "{ones} billion,",
     "{tens}",
-    "{ones} hundred",
-    "{ones} trillion",
+    "{ones} hundred and",
+    "{ones} trillion,",
+    "{tens}",
+    "{ones} hundred and",
+    "{ones} thousand,",
+    "{tens}",
   ],
   in: [
     "{ones}",
     "{tens}",
-    "{ones} hundred",
-    "{ones} thousand",
+    "{ones} hundred and",
+    "{ones} thousand,",
     "{tens}",
-    "{ones} lakh",
+    "{ones} lakh,",
     "{tens}",
-    "{ones} crore",
+    "{ones} crore,",
     "{tens}",
-    "{ones} hundred",
-    "{ones} thousand",
+    "{ones} hundred and",
+    "{ones} thousand,",
+    "{tens}",
+    "{ones} lakh,",
+    "{tens}",
+    "{ones} crore,",
+    "{tens}",
   ],
 };
 
+/**
+ * Get the right template for the digit.
+ * @param {number} i - Number's place to parse.
+ * @param {boolean} indian - Whether to use Indian system. 
+ * @returns 
+ */
 function getTenPower(i: number, indian = false) {
   const arr = indian ? tenPowers.in : tenPowers.int;
   i = i % arr.length;
   return arr[i];
 }
 
-export default (n: number, indian = false): string => {
+/**
+ * Parse a number into an english word string.
+ * @param {number} n - The number to parse.
+ * @param {boolean} indian  - Whether to use Indian system. 
+ * @returns {string} The number in words.
+ */
+export default function (n: number, indian = false): string {
   if (n === 0) return "zero";
   const digitNumbers: number[] = n.toString().split("").map((x) => Number(x))
     .reverse();
@@ -84,22 +105,9 @@ export default (n: number, indian = false): string => {
             getTenPower(i, indian).replace(/\{ones\}\s?/, "")
           }`,
         );
-        if (i !== digitNumbers.length - 2) digitStrings.push("and");
-
         ++i;
         continue;
       }
-
-      /*      if (digitNumbers[i] !== 0) {
-        digitStrings.push(
-          getTenPower(i + 1, indian).replace(
-            "{tens}",
-            `${tens[digitNumbers[i + 1]]} ${digits[digitNumbers[i]]}`,
-          ),
-        );
-        ++i;
-        continue;
-      }*/
     }
     digitStrings.push(
       getTenPower(i, indian).replace(
@@ -107,7 +115,7 @@ export default (n: number, indian = false): string => {
         digits[digitNumbers[i]],
       ).replace("{tens}", tens[digitNumbers[i]]),
     );
-    if ((i - 1) % 3 === 0 && !indian) digitStrings.push("and");
+    console.log((i - digitNumbers.length ))
   }
   return digitStrings.reverse().join(" ");
 };
