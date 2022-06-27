@@ -1,10 +1,9 @@
-// Add commas to a number
-
 /**
+ * Add commas to a number.
  * @param {number} x - Number to add commas in.
  * @param {string} type - Specify "in" for Indian system. Specify "ja" for Japanese system (the literal one or so I guess). Leave blank for the general one.
  */
-export default (x: number, type?: string): string => {
+export function AddComma(x: number, type?: string): string {
   if(!type) type = "x"
   switch (type.toLowerCase()) {
     case "in": {
@@ -27,3 +26,4 @@ export default (x: number, type?: string): string => {
     }
   }
 };
+export default AddComma;

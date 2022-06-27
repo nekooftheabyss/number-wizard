@@ -92,7 +92,7 @@ function getTenPower(i: number, indian = false) {
  * @param {boolean} indian  - Whether to use Indian system. 
  * @returns {string} The number in words.
  */
-export default function (n: number, indian = false): string {
+export function InWords(n: number, indian = false): string {
   if (n === 0) return "zero";
   const digitNumbers: number[] = n.toString().split("").map((x) => Number(x))
     .reverse();
@@ -115,7 +115,8 @@ export default function (n: number, indian = false): string {
         digits[digitNumbers[i]],
       ).replace("{tens}", tens[digitNumbers[i]]),
     );
-    console.log((i - digitNumbers.length ))
+//    console.log((i - digitNumbers.length ))
   }
   return digitStrings.reverse().join(" ");
 };
+export default InWords;
